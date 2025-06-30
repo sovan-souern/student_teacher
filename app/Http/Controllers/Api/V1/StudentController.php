@@ -63,14 +63,14 @@ class StudentController extends Controller
      */
     public function update(UpdateStudentRequest $request, string $id)
     {
-         $student = Student::find($id);
+        $student = Student::find($id);
 
         $validated = $request->validated();
 
         if (!$student) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Teacher not found'
+                'message' => 'Student not found'
             ], 404);
         }
 
@@ -103,4 +103,27 @@ class StudentController extends Controller
             'status' => 'success',
             'message' => 'Student deleted successfully'
         ], 200);
-    }}
+    }
+
+
+    public function getAdults()
+    {
+        $students = Student::where('age', '>=', 18)->get();
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $students
+        ], 200);
+    }
+
+
+    public function getFromSiemReap()
+    {
+        $students = Student::where('province', 'Siem Reap')->get();
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $students
+        ], 200);
+    }
+}

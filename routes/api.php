@@ -26,3 +26,7 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('teachers', TeacherController::class);
     Route::apiResource('students', StudentController::class);
 });
+
+
+Route::get('/students/adults', [StudentController::class, 'getAdults']);
+Route::get('/students/siem-reap', [StudentController::class, 'getFromSiemReap']);
